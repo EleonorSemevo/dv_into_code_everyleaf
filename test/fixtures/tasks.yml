@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  limit_date: 2021-09-06
+  status: MyString
+
+two:
+  name: MyString
+  limit_date: 2021-09-06
+  status: MyString
