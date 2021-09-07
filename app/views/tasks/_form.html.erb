@@ -17,6 +17,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div class="field">
     <%= form.label :limit_date %>
     <%= form.date_select :limit_date %>
   </div>
@@ -24,6 +29,11 @@
   <div class="field">
     <%= form.label :status %>
     <%= form.select(:status,['Finished','Pending'], {}) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :priority %>
+    <%= form.text_field :priority %>
   </div>
 
   <div class="actions">
