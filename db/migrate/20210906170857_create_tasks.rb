@@ -7,5 +7,6 @@ class CreateTasks < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+    change_column :tasks,:name, :string, null: false
   end
 end
