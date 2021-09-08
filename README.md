@@ -19,3 +19,5 @@ Model: Task
 * Commit 
 * Add heroku buildpack to your app: nodejs and ruby
 * Deploy to heroku
+
+Gem version: 3.0.3
