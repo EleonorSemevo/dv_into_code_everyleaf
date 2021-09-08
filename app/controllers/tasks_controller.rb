@@ -2,20 +2,19 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
   def index
-    # if params[:sort_expired]
-    #   @tasks = Task.all.order(limit_date: :desc)
-    # elsif params[:task].present?
-    #     if params[:task][:name]!=nil && params[:task][:status]!=nil
-    #       @tasks = Task.where('name like ?', params[:task][:name]).where(status: params[:task][:status])
-    #     elsif params[:task][:name]!=nil
-    #       @tasks = Task.where('name like ?', params[:task][:name])
-    #     elsif params[:task][:status]!=nil
-    #       @tasks = Task.where(status: params[:task][:status])
-    #     end
-    # else
-    #   @tasks = Task.all.order(created_at: :desc)
-    # end
-    @tasks = Task.all.order(created_at: :desc)
+    if params[:sort_expired]
+      @tasks = Task.all.order(limit_date: :desc)
+    elsif params[:task].present?
+        if params[:task][:name]!='' && params[:task][:status]!=''
+          @tasks = Task.where('name like ?', params[:task][:name]).where(status: params[:task][:status])
+        elsif params[:task][:name]!=''
+          @tasks = Task.where('name like ?', params[:task][:name])
+        elsif params[:task][:status]!=''
+          @tasks = Task.where(status: params[:task][:status])
+        end
+    else
+      @tasks = Task.all.order(created_at: :desc)
+    end
 
   end
 

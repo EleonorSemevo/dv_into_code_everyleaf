@@ -31,6 +31,39 @@ RSpec.describe 'Task management function', type: :system do
         expect(page).to have_content 'task'
       end
     end
+
+    context 'Quand on effectue recherche sur les champs name et status' do
+      it 'La recherche marche' do
+        FactoryBot.create(:task, name: 'task', content: 'some content', status: 'in progress', priority: 'middle', limit_date: Date.new(2021,9,9))
+
+        visit tasks_path
+        fill_in 'Name' , with: 'task'
+        select 'in progress', from: 'Status'
+        click_on 'Chercher'
+
+        expect(page).to have_content 'task'
+
+      end
+    end
+
+    context 'Quand on recherche sur status seul' do
+      it 'renvoie les donnees du status demande' do
+        FactoryBot.create(:task, name: 'task', content: 'some content', status: 'completed', priority: 'middle', limit_date: Date.new(2021,9,9))
+        FactoryBot.create(:task, name: 'task', content: 'some content', status: 'in progress', priority: 'middle', limit_date: Date.new(2021,9,9))
+        FactoryBot.create(:task, name: 'task', content: 'some content', status: 'completeds', priority: 'middle', limit_date: Date.new(2021,9,9))
+        FactoryBot.create(:task, name: 'task', content: 'some content', status: 'in progress', priority: 'middle', limit_date: Date.new(2021,9,9))
+
+        visit tasks_path
+        select 'in progress', from: 'Status'
+        click_on 'Chercher'
+        tasks = all('.task_status')
+
+        tasks.each do |task|
+          expect(task).to have_content 'in progress'
+        end
+
+      end
+    end
   end
   describe 'Detailed display function' do
     context 'When transitioned to any task details screen' do

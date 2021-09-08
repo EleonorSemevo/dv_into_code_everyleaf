@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Tasks</h1>
-<%= form_with(scope: :task, url: tasks_path,method: :get, locale: true) do |form|%>
+<%= form_with(scope: :task, url: tasks_path, method: :get, local: true ) do |form|%>
 
   <%= form.label :name %>
   <%= form.text_field :name %>
@@ -28,7 +28,7 @@
         <td class="task_row"><%= task.name %></td>
         <td><%= task.content %></td>
         <td><%= task.limit_date %></td>
-        <td><%= task.status %></td>
+        <td class="task_status"><%= task.status %></td>
         <td><%= task.priority %></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
