@@ -13,4 +13,9 @@ Model: Task
 
 * priority : string
 
-Précompiler les actifs
+##To deploy on heroku, here are the steps
+* Create a new application on heroku
+* Precompile asset with the command  rails assets:precompile RAILS_ENV=production
+* Commit 
+* Add heroku buildpack to your app: nodejs and ruby
+* Deploy to heroku

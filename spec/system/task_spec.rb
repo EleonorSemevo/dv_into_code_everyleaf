@@ -19,6 +19,17 @@ RSpec.describe 'Task management function', type: :system do
         expect(page).to have_content 'task'
       end
     end
+
+    context 'When tasks are listed in descending order of creation date and time' do
+      it 'displayed a list of created tasks' do
+        FactoryBot.create(:task, name: 'task1', content: 'some content', status: 'finished', priority: 'middle', limit_date: Date.new(2021,9,9))
+        FactoryBot.create(:task, name: 'task2', content: 'some content', status: 'finished', priority: 'middle', limit_date: Date.new(2021,9,9))
+        visit tasks_path
+        tasks = all('.task_row')
+        expect(tasks[0]).to have_content 'task2'
+      end
+
+    end
   end
   describe 'Detailed display function' do
     context 'When transitioned to any task details screen' do
