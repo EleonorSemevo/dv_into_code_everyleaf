@@ -2,7 +2,13 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
   def index
-    @tasks = Task.all
+    if params[:sort_expired]
+      @tasks = Task.all.order(limit_date: :desc)
+    else
+      @tasks = Task.all.order(created_at: :desc)
+    end
+
+
   end
 
   def show
@@ -38,6 +44,10 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     redirect_to tasks_path, notice: "Task was successfully destroyed."
+  end
+
+  def sort_dedline
+    @tasks = Task.all.order(limit_date: :desc)
   end
 
   private

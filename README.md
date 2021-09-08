@@ -13,4 +13,15 @@ Model: Task
 
 * priority : string
 
+Créer une nouvelle application heroku
+
+
+
 Précompiler les actifs
+
+commit 
+
+ajouter buidpack heroku
+
+deployer ensuite sur heroku
+
