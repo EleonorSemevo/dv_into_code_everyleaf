@@ -13,3 +13,4 @@ Model: Task
 
 * priority : string
 
+Précompiler les actifs
