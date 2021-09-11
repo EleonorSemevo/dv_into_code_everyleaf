@@ -14,10 +14,15 @@ Model: Task
 * priority : string
 
 ##To deploy on heroku, here are the steps
-* Create a new application on heroku
-* Precompile asset with the command  rails assets:precompile RAILS_ENV=production
-* Commit 
-* Add heroku buildpack to your app: nodejs and ruby
-* Deploy to heroku
+* Create a new application on heroku with command: heroku create
+* Precompile asset with the command rails assets: precompile RAILS_ENV=production
+* git add .
+* git commit -m "some message"
+* Add heroku buildpack to your app: nodejs and ruby withe thoses commands
+heroku buildpacks:set heroku/ruby
+heroku buildpacks:add --index 1 heroku/nodejs
+
+* Deploy to heroku with the command:
+ git push heroku partie2
 
 Gem version: 3.0.3
