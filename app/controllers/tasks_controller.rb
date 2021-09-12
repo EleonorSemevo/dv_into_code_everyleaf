@@ -1,16 +1,20 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :set_task, only: [:show, :edit, :update, :destroy ]
 
   def index
     if params[:sort_expired]
-      @tasks = Task.all.order(limit_date: :desc)
+      @tasks = Task.get_all
+    elsif params[:sort_priority]
+      @tasks = Task.sort_priority
     elsif params[:task].present?
-        if params[:task][:name]!='' && params[:task][:status]!=''
-          @tasks = Task.where('name like ?', params[:task][:name]).where(status: params[:task][:status])
-        elsif params[:task][:name]!=''
-          @tasks = Task.where('name like ?', params[:task][:name])
-        elsif params[:task][:status]!=''
-          @tasks = Task.where(status: params[:task][:status])
+      status = params[:task][:status]
+      name= params[:task][:name]
+        if name!='' && status!=''
+			@tasks = Task.name_status_search(name,status)
+        elsif name!=''
+			@tasks = Task.search_name(name)
+        elsif status!=''
+			@tasks = Task.search_status(status)
         end
     else
       @tasks = Task.all.order(created_at: :desc)
@@ -62,6 +66,8 @@ class TasksController < ApplicationController
       @task = Task.find(params[:id])
     end
     def task_params
-      params.require(:task).permit(:name, :limit_date, :status, :content, :priority)
+      task_params= params.require(:task).permit(:name, :limit_date, :status, :content, :priority)
+      task_params[:priority] = params[:task][:priority].to_i
+      return task_params
     end
 end
