@@ -10,15 +10,19 @@ class TasksController < ApplicationController
       status = params[:task][:status]
       name= params[:task][:name]
         if name!='' && status!=''
-			@tasks = Task.name_status_search(name,status)
+			     @tasks = Task.name_status_search(name,status)
         elsif name!=''
-			@tasks = Task.search_name(name)
+			     @tasks = Task.search_name(name)
         elsif status!=''
-			@tasks = Task.search_status(status)
+			    @tasks = Task.search_status(status)
+			  else
+			    @tasks = Task.all.order(created_at: :desc)
         end
     else
       @tasks = Task.all.order(created_at: :desc)
     end
+    
+   @tasks = @tasks.page(params[:page]).per(10) 
 
   end
 
