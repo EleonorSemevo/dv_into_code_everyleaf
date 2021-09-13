@@ -9,31 +9,31 @@ RSpec.describe Task, type: :model do
   it "is invalid without a name" do
     task = Task.new(name: nil, content: 'some content', limit_date: Date.new(2021,9,30), status: "finished", priority: 'middle')
     task.valid?
-    expect(task.errors[:name]).to include("can't be blank")
+    expect(task.errors[:name]).to include("doit être rempli(e)")
 
   end
 
   it "is invalid without a content" do
     task = Task.new(name: 'Move tables', content: nil, limit_date: Date.new(2021,9,30), status: "finished", priority: 'middle')
     task.valid?
-    expect(task.errors[:content]).to include("can't be blank")
+    expect(task.errors[:content]).to include("doit être rempli(e)")
 
   end
 
   it "is invalid without a limit_date" do
     task = Task.new(name: 'Move tables', content: 'some content', limit_date: nil , status: "finished", priority: 'middle')
     task.valid?
-    expect(task.errors[:limit_date]).to include("can't be blank")
+    expect(task.errors[:limit_date]).to include("doit être rempli(e)")
   end
   it "is invalid without a status" do
     task = Task.new(name: 'Move tables', content: 'some content', limit_date: Date.new(2021,9,30), status: nil , priority: 'middle')
     task.valid?
-    expect(task.errors[:status]).to include("can't be blank")
+    expect(task.errors[:status]).to include("doit être rempli(e)")
   end
   it "is invalid without a priority" do
     task = Task.new(name: 'Move tables', content: 'some content', limit_date: Date.new(2021,9,30), status: "finished", priority: nil )
     task.valid?
-    expect(task.errors[:priority]).to include("can't be blank")
+    expect(task.errors[:priority]).to include("doit être rempli(e)")
   end
 
 end
