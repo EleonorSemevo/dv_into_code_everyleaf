@@ -3,11 +3,9 @@ class UsersController < ApplicationController
   before_action :my_account, only: [:edit, :update, :destroy]
   before_action :connected, only: [:new, :create]
   skip_before_action :login_required, only:  [:new, :create]
-  
 
-  def index
-    @users = User.all
-  end
+
+
 
   def show
   end
@@ -23,30 +21,24 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
         session[:user_id] = @user.id
-        redirect_to user_path(@user), notice: "User was successfully created." 
+        redirect_to user_path(@user), notice: "User was successfully created."
     else
-      render :new, status: :unprocessable_entity 
+      render :new, status: :unprocessable_entity
     end
-    
+
   end
 
   def update
     if @user.update(user_params)
-      redirect_to user_path(@user), notice: "User was successfully updated." 
-
+      redirect_to user_path(@user), notice: "User was successfully updated."
     else
-      render :edit, status: :unprocessable_entity 
-      
+      render :edit, status: :unprocessable_entity
+
     end
 
   end
 
-  def destroy
-    @user.destroy
-    respond_to do |format|
-      redirect_to users_url, notice: "User was successfully destroyed."
-    end
-  end
+
 
   private
   def set_user
@@ -54,7 +46,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation,:admin)
   end
 
   def my_account

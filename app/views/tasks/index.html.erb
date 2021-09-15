@@ -1,12 +1,10 @@
-	<p id="notice"><%= notice %></p>
-
 <h1>general tasks list</h1>
 
 
 
 <div class="row">
   <%= form_with(scope: :task, url: tasks_path, method: :get, local: true ) do |form|%>
- 
+
 	  <%= form.label :task_name, class: 'col-md-1' %>
 	  <%= form.text_field :name, class: 'col-md-3',style: "padding: 7px;", placeholder: 'search...' %>
 	  <%= form.label :status, class: 'col-md-1' %>
@@ -16,13 +14,13 @@
 		  <%= form.select(:label,['','unstarted','in progress', 'completed'], {},class: '',style: "padding: 7px;") %>
 		  <%= form.submit 'Chercher', class: 'btn btn-default'%>
 	  <span/>
-		
+
  <% end %>
 </div>
 
 <div class="row">
 	<%= link_to 'New Task', new_task_path, class: 'btn btn-primary left-marge', style: "color: white;" %>
-  
+
 </div>
 
 <table class="table">
@@ -33,14 +31,14 @@
       <th  scope="col" class="text-primary">
       	<span class="deadline text-primary">
 		    <%= link_to "Deadline", tasks_path(sort_expired: "true"), class: "text-primary" %>
-		    <%= image_tag "up.png", style: 'height: 30px; width: 20px; ' %> 
+		    <%= image_tag "up.png", style: 'height: 30px; width: 20px; ' %>
 		</span>
       </th>
       <th  scope="col">Status</th>
       <th  scope="col" class="text-primary">
       	<span class="deadline text-primary">
 		    <%= link_to "Priority", tasks_path(sort_priority: "true"), class: "text-primary" %>
-		    <%= image_tag "up.png", style: 'height: 30px; width: 20px; ' %> 
+		    <%= image_tag "up.png", style: 'height: 30px; width: 20px; ' %>
 		</span>
       </th>
       <!--<th colspan="3"></th>-->
@@ -67,8 +65,3 @@
 
 
 <%= paginate @tasks %>
-
-
-
-
-

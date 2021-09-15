@@ -1,12 +1,11 @@
 class Admin::UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :is_admin
 
   def index
      @users = User.all
-     @users = @users.page(params[:page]).per(10) 
+     @users = @users.page(params[:page]).per(10)
   end
-
 
   def new
     @user = User.new
@@ -22,21 +21,37 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def show
+  end
 
+  def edit
+  end
+  def update
+    if @user.update(admin_params)
+      redirect_to admin_users_path(@user), notice: "User was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @user.destroy
+    redirect_to admin_users_path, notice: "User was successfully destroyed."
+  end
 
   private
   def set_user
-    @user = User.find_by(d: params[:id])
+    @user = User.find_by(id: params[:id])
   end
 
   def admin_params
-    params.require(:admin).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation,:admin)
   end
 
   def is_admin
     unless @current_user.admin
-      redirect_to tasks_path
+      redirect_to tasks_path, notice: "Only admin can access this page"
     end
   end
-  
+
 end
