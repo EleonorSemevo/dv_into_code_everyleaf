@@ -41,7 +41,7 @@ RSpec.describe 'User management', type: :system do
         # login already
         expect(page).to have_content 'general tasks list'
       end
-      end
+    end
 
       context 'when user logged in and jump to an other person page' do
         it 'redirect to tasks list' do
@@ -58,7 +58,7 @@ RSpec.describe 'User management', type: :system do
         click_on 'account'
         expect(page).to have_content 'My page'
     end
-
+  end
     context 'User logged out' do
       it 'log user out by showing login forms' do
         click_on 'Logout'
@@ -66,6 +66,4 @@ RSpec.describe 'User management', type: :system do
       end
     end
   end
-
-end
 end
