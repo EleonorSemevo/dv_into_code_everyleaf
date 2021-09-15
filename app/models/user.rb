@@ -1,10 +1,11 @@
 class User < ApplicationRecord
   before_validation {email.downcase!}
 
-  validates :name, presence: true, length: {minimum: 3}
-  validates :email, presence: true, uniqueness: true
-  validates :password_confirmation, presence: true, length: {minimum: 6}
-  validates :password, presence: true
+  validates :name, presence: true
+  validates :email, presence: true,uniqueness: true, length: { maximum: 255 },
+    format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
+  validates :password, length: {minimum: 6}
+  has_many :tasks
 
   has_secure_password
 end
