@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
-  before_action :my_account, only: [:edit, :update, :destroy,:show]
+  before_action :my_account, only: [:edit, :update, :destroy, :show]
   before_action :connected, only: [:new, :create]
   skip_before_action :login_required, only:  [:new, :create]
+
 
 
 
@@ -50,7 +51,7 @@ class UsersController < ApplicationController
   end
 
   def my_account
-    if @current_user.id != params[:id] and !@current_user.admin
+    unless @current_user.id == params[:id].to_i 
       redirect_to tasks_path
     end
   end

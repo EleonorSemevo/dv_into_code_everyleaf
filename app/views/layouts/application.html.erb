@@ -10,35 +10,39 @@
   </head>
 
   <body>
-    <% if logged_in? %> 
-      <%= link_to "Profile", user_path(current_user.id) %> 
-      <%= link_to "Logout", session_path(current_user.id), method: :delete %> 
-    <% else %> 
-      <%= link_to "Sign up", new_user_path %> 
-      <%= link_to "Login", new_session_path %> 
-    <% end %> 
+    <% if logged_in? %>
+      <%# <%= link_to "Profile", user_path(current_user.id) %> %>
+      <%# <%= link_to "Logout", session_path(current_user.id), method: :delete %> %>
+    <% else %>
+      <%= link_to "Sign up", new_user_path %>
+      <%= link_to "Login", new_session_path %>
+    <% end %>
+
 
     <div class="container">
-      <div class="row">
-        <ul class="nav nav-pills" style="background-color: #f4f5f7;">
-          <li class="">
-            <a href="#">Task_Management</a>
-          </li>
-          <li><a href="#">Task registration</a></li>
-          <li><a href="#">Task list</a></li>
-          <li><a href="#">account</a></li>
-          <li><a href="#">Logout</a></li>
-          
-        </ul>
-      </div>
-      
+      <% if logged_in? %>
+        <div class="row">
+          <ul class="nav nav-pills" style="background-color: #f4f5f7;">
+            <li class="">
+              <a href="#">Task_Management</a>
+            </li>
+            <li><a href="#">Task registration</a></li>
+            <li><a href="#">Task list</a></li>
+            <li><%= link_to "account", user_path(@current_user.id) %></li>
+            <li><%= link_to "Logout", session_path(current_user.id), method: :delete %></li>
+
+          </ul>
+        </div>
+      <% end %>
       <div class="flash">
-        <% flash.each do |key, value| %> 
-        <%= content_tag(:div, value, class: "#{key}") %> 
-        <% end %> 
+        <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "#{key}") %>
+        <% end %>
       </div>
-      
       <%= yield %>
+
     </div>
+
+
   </body>
 </html>
