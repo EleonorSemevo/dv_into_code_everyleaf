@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
-  before_action :my_account, only: [:edit, :update, :destroy]
+  before_action :my_account, only: [:edit, :update, :destroy,:show]
   before_action :connected, only: [:new, :create]
   skip_before_action :login_required, only:  [:new, :create]
 
@@ -55,9 +55,5 @@ class UsersController < ApplicationController
     end
   end
 
-  def connected
-    if logged_in? && @current_user.admin
-      redirect_to tasks_path
-    end
-  end
+
 end
