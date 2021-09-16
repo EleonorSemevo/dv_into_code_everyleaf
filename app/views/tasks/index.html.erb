@@ -28,6 +28,7 @@
     <tr>
       <th  scope="col">Name</th>
       <th  scope="col">Content</th>
+      <th scope="col">Author</th>
       <th  scope="col" class="text-primary">
       	<span class="deadline text-primary">
 		    <%= link_to "Deadline", tasks_path(sort_expired: "true"), class: "text-primary" %>
@@ -50,6 +51,7 @@
       <tr>
         <td class="task_row"><%= task.name %></td>
         <td><%= task.content %></td>
+        <td><%= task.user.name %></td>
         <td><%= task.limit_date %></td>
         <td class="task_status"><%= task.status %></td>
         <td><%= task.priority %></td>

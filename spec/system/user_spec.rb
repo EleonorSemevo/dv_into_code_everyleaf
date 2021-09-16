@@ -1,5 +1,7 @@
 require 'rails_helper'
 RSpec.describe 'User management', type: :system do
+  # let!(:user1) { FactoryBot.create(:user1) }
+  # let!(:task) { FactoryBot.create(:task, user: user) }
   describe 'New creation user function' do
     context 'When registering a new user' do
       it 'The created user is connected' do
