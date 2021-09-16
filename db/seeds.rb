@@ -5,11 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-50.times do
-  Task.create(name: "task", content: "some content", status: "in progress", priority: 2, limit_date: Date.today)
+require 'faker'
+500.times do
+  Task.create(name: 'task1', content: 'Something', status: "in progress", priority: 2, limit_date: Date.today)
 end
 
-30.times do
-  Task.create(name: "task1", content: "some content", status: "unstarted", priority: 1, limit_date: Date.today)
+50.times do
+  Task.create(name: 'Task2', content: 'Great things',
+     status: "unstarted", priority: 2, limit_date: Date.today)
 end
