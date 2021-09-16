@@ -51,7 +51,7 @@ class UsersController < ApplicationController
   end
 
   def my_account
-    unless @current_user.id == params[:id].to_i 
+    unless @current_user.id == params[:id].to_i
       redirect_to tasks_path
     end
   end
