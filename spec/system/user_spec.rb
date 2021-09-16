@@ -66,4 +66,105 @@ RSpec.describe 'User management', type: :system do
       end
     end
   end
+
+  describe 'Admin screen test' do
+    before do
+        FactoryBot.create(:admin1, name: 'Loren', email: 'admin1@gmail.com', password: '123456', admin: true)
+    end
+    context 'when admin log in' do
+      it 'shows admin panel' do
+        visit tasks_path
+        click_on 'Login'
+        fill_in 'Email' , with: 'admin1@gmail.com'
+        fill_in 'Password' , with: '123456'
+        click_on 'Se connecter'
+
+        expect(page).to have_content('Admin page')
+      end
+    end
+
+    context 'when general try to access management screen' do
+      it 'shows tasks list of user with notice' do
+        FactoryBot.create(:user2, name: 'Loren', email: 'mora@gmail.com', password: '123456')
+        visit tasks_path
+        click_on 'Login'
+        fill_in 'Email' , with: 'mora@gmail.com'
+        fill_in 'Password' , with: '123456'
+        click_on 'Se connecter'
+
+        visit admin_users_path
+        expect(page).to have_content 'general tasks list'
+        expect(page).to have_content 'Only admin can access this page'
+      end
+    end
+
+    context 'Admin register new users' do
+      it 'shows user registered in users list page' do
+        visit tasks_path
+        click_on 'Login'
+        fill_in 'Email' , with: 'admin1@gmail.com'
+        fill_in 'Password' , with: '123456'
+        click_on 'Se connecter'
+
+        click_on 'New User'
+        fill_in 'Name' , with: 'Loren'
+        fill_in 'Email' , with: 'lore@gmail.com'
+        fill_in 'Password' , with: '123456'
+        fill_in 'Password confirmation' , with: '123456'
+        click_on 'Enregistrer'
+
+        expect(page).to have_content 'Loren'
+
+      end
+    end
+
+    context 'When admin consult user detail' do
+      it 'shows user detail' do
+        visit tasks_path
+        click_on 'Login'
+        fill_in 'Email' , with: 'admin1@gmail.com'
+        fill_in 'Password' , with: '123456'
+        click_on 'Se connecter'
+
+        user = FactoryBot.create(:user1, name: 'Loren', email: 'doda@gmail.com', password: '123456')
+        visit admin_user_path(user)
+        expect(page).to have_content('doda@gmail.com')
+      end
+    end
+
+    context 'Admin can edit user detail' do
+      it 'shows user detail updated' do
+        visit tasks_path
+        click_on 'Login'
+        fill_in 'Email' , with: 'admin1@gmail.com'
+        fill_in 'Password' , with: '123456'
+        click_on 'Se connecter'
+
+        user = FactoryBot.create(:user1, name: 'Loren', email: 'doda@gmail.com', password: '123456')
+        visit edit_admin_user_path(user)
+        fill_in 'Name', with: 'Lola'
+        fill_in 'Password' , with: '1234567'
+        fill_in 'Password confirmation' , with: '1234567'
+        click_on 'Enregistrer'
+        expect(page).to have_content('Lola')
+      end
+    end
+
+    context 'Admin can delete user' do
+      it 'deleted user' do
+        visit tasks_path
+        click_on 'Login'
+        fill_in 'Email' , with: 'admin1@gmail.com'
+        fill_in 'Password' , with: '123456'
+        click_on 'Se connecter'
+
+        user = FactoryBot.create(:user1, name: 'Lory', email: 'doda@gmail.com', password: '123456')
+        user.destroy
+        expect(page).not_to have_content('Lory')
+      end
+    end
+
+
+
+  end
 end
