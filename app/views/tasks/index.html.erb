@@ -6,7 +6,7 @@
 
 <div class="row">
   <%= form_with(scope: :task, url: tasks_path, method: :get, local: true ) do |form|%>
- 
+
 	  <%= form.label :task_name, class: 'col-md-1' %>
 	  <%= form.text_field :name, class: 'col-md-3',style: "padding: 7px;", placeholder: 'search...' %>
 	  <%= form.label :status, class: 'col-md-1' %>
@@ -16,13 +16,13 @@
 		  <%= form.select(:label,['','unstarted','in progress', 'completed'], {},class: '',style: "padding: 7px;") %>
 		  <%= form.submit 'Chercher', class: 'btn btn-default'%>
 	  <span/>
-		
+
  <% end %>
 </div>
 
 <div class="row">
 	<%= link_to 'New Task', new_task_path, class: 'btn btn-primary left-marge', style: "color: white;" %>
-  
+
 </div>
 
 <table class="table">
@@ -32,15 +32,15 @@
       <th  scope="col">Content</th>
       <th  scope="col" class="text-primary">
       	<span class="deadline text-primary">
-		    <%= link_to "Deadline", tasks_path(sort_expired: "true"), class: "text-primary" %>
-		    <%= image_tag "up.png", style: 'height: 30px; width: 20px; ' %> 
+		    <%= link_to "Deadline", tasks_path(sort_expired: "true"), style: 'color: green;' %>
+		    <%= image_tag "up.png", style: 'height: 30px; width: 20px; ' %>
 		</span>
       </th>
       <th  scope="col">Status</th>
       <th  scope="col" class="text-primary">
       	<span class="deadline text-primary">
-		    <%= link_to "Priority", tasks_path(sort_priority: "true"), class: "text-primary" %>
-		    <%= image_tag "up.png", style: 'height: 30px; width: 20px; ' %> 
+		    <%= link_to "Priority", tasks_path(sort_priority: "true"),  style: 'color: green;'  %>
+		    <%= image_tag "up.png", style: 'height: 30px; width: 20px; ' %>
 		</span>
       </th>
       <!--<th colspan="3"></th>-->
@@ -55,9 +55,9 @@
         <td><%= task.limit_date %></td>
         <td class="task_status"><%= task.status %></td>
         <td><%= task.priority %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', task, class: 'show_link clear_link' %></td>
+        <td><%= link_to 'Edit', edit_task_path(task), class: 'edit_link clear_link' %></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } , class: 'destroy_method clear_link'%></td>
       </tr>
     <% end %>
   </tbody>
@@ -67,8 +67,3 @@
 
 
 <%= paginate @tasks %>
-
-
-
-
-
