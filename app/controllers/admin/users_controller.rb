@@ -13,7 +13,6 @@ class Admin::UsersController < ApplicationController
 
   def create
     @user = User.new(admin_params)
-    @user.admin = true;
     if @user.save
       redirect_to admin_users_path
     else
@@ -28,7 +27,7 @@ class Admin::UsersController < ApplicationController
   end
   def update
     if @user.update(admin_params)
-      redirect_to admin_users_path(@user), notice: "User was successfully updated."
+      redirect_to admin_users_path, notice: "User was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end

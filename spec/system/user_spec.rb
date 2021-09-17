@@ -160,8 +160,8 @@ RSpec.describe 'User management', type: :system do
         fill_in 'Password' , with: '123456'
         click_on 'Se connecter'
 
-        user = FactoryBot.create(:user1, name: 'Lory', email: 'doda@gmail.com', password: '123456')
-        user.destroy
+        #user = FactoryBot.create(:user1, name: 'Lory', email: 'doda@gmail.com', password: '123456')
+        click_on 'destroy'
         expect(page).not_to have_content('Lory')
       end
     end
