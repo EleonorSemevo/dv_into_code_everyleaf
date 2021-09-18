@@ -13,5 +13,5 @@ end
 30.times do
   Task.create(name: "task1", content: "some content", status: "unstarted", priority: 1, limit_date: Date.today)
 end
-
-User.create(name: "loren", email: 'lorensemevo@gmail.com', password: 'hello1234', password_confirmation: 'hello1234', admin: true)
+User.create(name: "eleonor", email: 'eleonor@gmail.com', password: 'hello1234', password_confirmation: 'hello1234')
+User.create(name: "admin", email: 'admin@gmail.com', password: 'admin123', password_confirmation: 'admin123', admin: true)
