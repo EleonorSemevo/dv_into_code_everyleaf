@@ -17,3 +17,7 @@ end
   Task.create(name: 'Task2', content: 'Great things',
      status: "unstarted", priority: 2, limit_date: Date.today)
 end
+
+
+User.create(name: "eleonor", email: 'eleonor@gmail.com', password: 'hello1234', password_confirmation: 'hello1234')
+User.create(name: "admin", email: 'admin@gmail.com', password: 'admin123', password_confirmation: 'admin123', admin: true)
