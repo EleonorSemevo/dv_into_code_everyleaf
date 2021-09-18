@@ -1,0 +1,6 @@
+;; Object everyleaf
+;; EDE Project Files are auto generated: Do Not Edit
+(ede-proj-project "everyleaf"
+  :file "Project.ede"
+  :name "everyleaf"
+  :targets nil)

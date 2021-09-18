@@ -1,29 +1,37 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @task.name %>
-</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th  scope="col">Name</th>
+      <td><%= @task.name %></td>
+    </tr>
+  </thead>
 
-<p>
-  <strong>Content:</strong>
-  <%= @task.content %>
-</p>
+  <tbody>
+      <tr>
+      <th  scope="col">Content</th>
+        <td><%= @task.content %></td>
+      </tr>
 
-<p>
-  <strong>Limit date:</strong>
-  <%= @task.limit_date %>
-</p>
+<tr>
+	<th  scope="col">Deadline</th>
+	<td>  <%= @task.limit_date %></td>
+      </tr>
 
-<p>
-  <strong>Status:</strong>
-  <%= @task.status %>
-</p>
+<tr>
+        <th  scope="col">Status</th>
+        <td>  <%= @task.status %></td>
+      </tr>
 
-<p>
-  <strong>Priority:</strong>
-  <%= @task.priority %>
-</p>
+<tr>
+        <th  scope="col">Priority</th>
+        <td><%= @task.priority %></td>
+      </tr>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_task_path(@task), class: 'btn btn-primary text-white left-marge' %> |
+<%= link_to 'Back', tasks_path, class: 'btn btn-success text-white left-marge' %>
