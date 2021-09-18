@@ -3,23 +3,23 @@ class TasksController < ApplicationController
 
   def index
     if params[:sort_expired]
-      @tasks = Task.get_all
+      @tasks = @current_user.tasks.order(limit_date: :desc)
     elsif params[:sort_priority]
-      @tasks = Task.sort_priority
+      @tasks = @current_user.tasks.order(priority: :desc)
     elsif params[:task].present?
       status = params[:task][:status]
       name= params[:task][:name]
         if name!='' && status!=''
-			     @tasks = Task.name_status_search(name,status)
+           @tasks = @current_user.tasks.where('name like ? and status like ?', name, status)
         elsif name!=''
-			     @tasks = Task.search_name(name)
+           @tasks = @current_user.tasks.where('name like ?', name)
         elsif status!=''
-			    @tasks = Task.search_status(status)
-			  else
-			    @tasks = Task.all.order(created_at: :desc)
+          @tasks = @current_user.tasks.where('status like ?', status)
+        else
+          @tasks = @current_user.tasks.order(created_at: :desc)
         end
     else
-      @tasks = Task.all.order(created_at: :desc)
+      @tasks = @current_user.tasks.order(created_at: :desc)
     end
     
    @tasks = @tasks.page(params[:page]).per(10) 
@@ -37,7 +37,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = @current_user.tasks.build(task_params)
     if @task.save
       redirect_to tasks_path, notice: "Task was successfully created."
     else

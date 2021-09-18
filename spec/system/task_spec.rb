@@ -42,19 +42,19 @@ RSpec.describe 'Task management function', type: :system do
       end
 
     end
-    
+
     context 'If you click the link to sort by end deadline' do
       it 'display a list of tasks sorted in descending order of end deadlines' do
         FactoryBot.create(:task, name: 'task', content: 'some content', status: 'unstarted', priority: 1, limit_date: Date.new(2021,9,9))
         FactoryBot.create(:task, name: 'task1', content: 'some content', status: 'unstarted', priority: 1, limit_date: Date.today)
-        
+
         visit tasks_path
         click_on 'Deadline'
         tasks = all('.task_row')
 
-        
+
           expect(tasks[0]).to have_content 'task1'
-      
+
       end
     end
 
@@ -69,7 +69,7 @@ RSpec.describe 'Task management function', type: :system do
       end
     end
   end
-  
+
   #nouveau tests
   describe 'Search function' do
     before do
@@ -84,7 +84,7 @@ RSpec.describe 'Task management function', type: :system do
         fill_in 'task_name' , with: 'task'
         click_on 'Chercher'
         tasks = all('.task_row')
-      
+
         expect(tasks[0]).to have_content 'task'
 
       end
@@ -104,7 +104,7 @@ RSpec.describe 'Task management function', type: :system do
     end
     context 'Name performing fuzzy search of name and status search' do
       it "Narrow down tasks that include search keywords in the Title and exactly match the status" do
-        
+
         visit tasks_path
         fill_in 'task_name' , with: 'task'
         select 'in progress', from: 'Status'
@@ -115,6 +115,6 @@ RSpec.describe 'Task management function', type: :system do
       end
     end
   end
-  
- 
+
+
 end
