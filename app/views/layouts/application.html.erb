@@ -10,25 +10,30 @@
   </head>
   <body>
 
-  	<div class="container">
+    <div class="container">
       <% if logged_in? %>
-    		<div class="row ">
-    		  <header>
+        <div class="row ">
+          <header>
             <ul class="nav nav-pills" style="background-color: #f4f5f7;">
-      			  <li class="">
-      			    <a class="nav-link" href="#">Task_Management</a>
-      			  </li>
+              <li class="">
+                <a class="nav-link" href="#">Task_Management</a>
+              </li>
               <li><%= link_to "Task registration", new_task_path %></li>
               <li><%= link_to "Task list", tasks_path %></li>
               <li><%= link_to "account", user_path(@current_user.id) %></li>
               <li><%= link_to "Logout", session_path(current_user.id), method: :delete %></li>
-      			</ul>
+               <% if @current_user.admin %> 
+                <li>
+                  <%= link_to "Users management", admin_users_path %>
+                </li>
+               <% end %> 
+            </ul>
           </header>
       <% else  %>
       <%= link_to "Sign up", new_user_path, class: 'btn btn-primary', style: 'color: white' %>
       <%= link_to "Login", new_session_path, class: 'btn btn-success', style: 'color: white' %>
       <% end %>
-		</div>
+    </div>
 
     <div class="flash">
       <% flash.each do |key, value| %>
