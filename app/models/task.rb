@@ -19,4 +19,6 @@ class Task < ApplicationRecord
   has_many :tags
   has_many :taggings
   has_many :tasks_tags, through: :taggings, source: :tag
+
+  
 end

@@ -11,9 +11,11 @@
 	  <%= form.select(:status,['','unstarted','in progress', 'completed'], {},class: 'col-md-1',style: "padding: 7px;") %>
 	  <%= form.label :label, class: 'col-md-1' %>
 	  <span class="col-md-3 input-group " role="group" aria-label="...">
-		  <%= form.select(:label,['','unstarted','in progress', 'completed'], {},class: '',style: "padding: 7px;") %>
+      <%= form.select(:tag_id, Tag.all.collect { |p| [ p.name, p.id ] }, {include_blank: true}, class: '', style: "padding: 7px;") %>
 		  <%= form.submit 'Chercher', class: 'btn btn-default'%>
 	  <span/>
+
+
 
  <% end %>
 </div>

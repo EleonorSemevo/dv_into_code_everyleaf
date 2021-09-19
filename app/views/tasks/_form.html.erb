@@ -36,13 +36,17 @@
     <%= form.select(:priority, Task.priorities,{}, class: 'select-form') %>
   </div>
 
-<br>
-<% Tag.all.each do |tag| %>
-<%= form.check_box :tag_ids, {multiple: true, checked: tag[:checked], disabled: tag[:disabled], include_hidden: false}, tag[:id] %>
-<label style="background-color: aquamarine "> <%= tag.name  %></label>
-<% end %>
+  <br>
+  <% Tag.all.each do |tag| %>
+  <%= form.check_box :tag_ids, {multiple: true, checked: tag[:checked], disabled: tag[:disabled], include_hidden: false}, tag[:id] %>
+  <label style="background-color: aquamarine "> <%= tag.name  %></label>
+  <% end %>
+  
   <div class="actions">
     <%= form.submit class: 'btn btn-primary left-marge' %>
   </div>
 <% end %>
+
+
+
 <div>

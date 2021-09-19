@@ -9,7 +9,10 @@ class TasksController < ApplicationController
     elsif params[:task].present?
       status = params[:task][:status]
       name= params[:task][:name]
-        if name!='' && status!=''
+        if params[:task][:tag_id]!= ''
+          tag_id = params[:task][:tag_id]
+          @tasks = Tag.find(tag_id).tagging_tasks
+        elsif name!='' && status!=''
            @tasks = @current_user.tasks.where('name like ? and status like ?', name, status)
         elsif name!=''
            @tasks = @current_user.tasks.where('name like ?', name)
@@ -74,7 +77,7 @@ class TasksController < ApplicationController
       @task = Task.find(params[:id])
     end
     def task_params
-      task_params= params.require(:task).permit(:name, :limit_date, :status, :content, :priority, :tag_ids)
+      task_params= params.require(:task).permit(:name, :limit_date, :status, :content, :priority, :tag_id)
       task_params[:priority] = params[:task][:priority].to_i
       return task_params
     end
