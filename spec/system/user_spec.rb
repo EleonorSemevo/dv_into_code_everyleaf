@@ -33,7 +33,7 @@ RSpec.describe 'User management', type: :system do
       FactoryBot.create(:user1, name: 'Loren', email: 'lora@gmail.com', password: '123456')
       visit tasks_path
       click_on 'Login'
-      fill_in 'Email' , with: 'loren@gmail.com'
+      fill_in 'Email' , with: 'lora@gmail.com'
       fill_in 'Password' , with: '123456'
       click_on 'Se connecter'
       #FactoryBot.create(:second_task, title: "sample")
