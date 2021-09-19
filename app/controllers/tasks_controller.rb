@@ -21,8 +21,8 @@ class TasksController < ApplicationController
     else
       @tasks = @current_user.tasks.order(created_at: :desc)
     end
-    
-   @tasks = @tasks.page(params[:page]).per(10) 
+
+   @tasks = @tasks.page(params[:page]).per(10)
 
   end
 
@@ -38,7 +38,11 @@ class TasksController < ApplicationController
 
   def create
     @task = @current_user.tasks.build(task_params)
+
     if @task.save
+      params[:task][:tag_ids].each do|id|
+        Tagging.create(task_id: @task.id, tag_id: id)
+      end
       redirect_to tasks_path, notice: "Task was successfully created."
     else
       render :new, status: :unprocessable_entity
@@ -70,7 +74,7 @@ class TasksController < ApplicationController
       @task = Task.find(params[:id])
     end
     def task_params
-      task_params= params.require(:task).permit(:name, :limit_date, :status, :content, :priority)
+      task_params= params.require(:task).permit(:name, :limit_date, :status, :content, :priority, :tag_ids)
       task_params[:priority] = params[:task][:priority].to_i
       return task_params
     end

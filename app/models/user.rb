@@ -6,6 +6,9 @@ class User < ApplicationRecord
     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
   validates :password, length: {minimum: 6}
   has_many :tasks, dependent: :delete_all
+  has_many :tags
+  has_many :taggings
+
 
   has_secure_password
 end

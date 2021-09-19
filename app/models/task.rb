@@ -12,8 +12,11 @@ class Task < ApplicationRecord
   scope :name_status_search, ->(name,status){where('name like ? and status like ?', name, status)}
   scope :sort_priority, ->(){order(priority: :desc)}
 
-  
 
 
-  has_one :user
+
+  belongs_to :user
+  has_many :tags
+  has_many :taggings
+  has_many :tasks_tags, through: :taggings, source: :tag
 end
