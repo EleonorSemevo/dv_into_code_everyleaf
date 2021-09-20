@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post "/", to: "tasks#create"
 
   get 'sessions/new'
+  resources :tags
   resources :sessions, only: [:new, :create, :show, :destroy]
   resources :tasks, except: [:index]
 

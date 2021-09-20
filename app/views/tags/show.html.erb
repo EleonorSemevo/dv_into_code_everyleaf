@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th  scope="col">Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+        <td><%= @tag.name %></td>
+      </tr>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_tag_path(@tag), class: 'btn btn-primary text-white left-marge' %> |
+<%= link_to 'Back', tags_path, class: 'btn btn-success text-white left-marge' %>
