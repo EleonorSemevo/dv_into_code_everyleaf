@@ -5,7 +5,8 @@ FactoryBot.define do
     content { 'some content' }
     status { 'finished' }
     priority { 'middle' }
-    limit_date { Date.new(2021, 9, 9) }
+    limit_date { Date.new(2021, 9, 9)
+     }
   end
 
   factory :second_task, class: Task do
