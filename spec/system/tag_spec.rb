@@ -89,7 +89,7 @@ RSpec.describe 'Label management function', type: :system do
 
         visit tasks_path
         # select 'tag1', from: 'Tag'
-        select "tag1", from: "task_tag" # find by id
+        select "tag1", from: "task_label" # find by id
         click_on 'Chercher'
         expect(page).to have_content 'tag1'
 

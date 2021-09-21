@@ -9,9 +9,9 @@
 	  <%= form.text_field :name, class: 'col-md-3',style: "padding: 7px;", placeholder: 'search...' %>
 	  <%= form.label :status, class: 'col-md-1' %>
 	  <%= form.select(:status,['','unstarted','in progress', 'completed'], {},class: 'col-md-1',style: "padding: 7px;") %>
-	  <%= form.label :tag, class: 'col-md-1', for: 'task[tag]' %>
+	  <%= form.label :label, class: 'col-md-1', for: 'task[tag]' %>
 	  <span class="col-md-3 input-group " role="group" aria-label="...">
-      <%= form.select(:tag, Tag.all.collect { |p| [ p.name, p.id ] }, {id: 'yes'}, class: '', style: "padding: 7px;") %>
+      <%= form.select(:label, Tag.all.collect { |p| [ p.name, p.id ] }, {id: 'yes'}, class: '', style: "padding: 7px;") %>
 		  <%= form.submit 'Chercher', class: 'btn btn-default'%>
 	  <span/>
 

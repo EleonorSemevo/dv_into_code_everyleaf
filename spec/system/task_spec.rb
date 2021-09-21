@@ -3,7 +3,8 @@ RSpec.describe 'Task management function', type: :system do
   describe 'New creation function' do
     context 'When creating a new task' do
       it 'The created task is displayed' do
-        task = FactoryBot.create(:task, name: 'task', content: 'some content', status: 'unstarted', priority: 1, limit_date: Date.new(2021,9,9))
+        user =   FactoryBot.create(:user2, name: 'Loren', email: 'odette@gmail.com', password: '123456')
+        task = FactoryBot.create(:task, name: 'task', content: 'some content', status: 'unstarted', priority: 1, limit_date: Date.new(2021,9,9), user_id: user.id)
 
         visit tasks_path
         expect(page).to have_content 'task'
@@ -12,8 +13,9 @@ RSpec.describe 'Task management function', type: :system do
 
     context 'When creating a new task ' do
       it ' shows up at top' do
-         FactoryBot.create(:task, name: 'task1', content: 'some content1', status: 'unstarted', priority: 1, limit_date: Date.new(2021,9,9))
-         FactoryBot.create(:task, name: 'task2', content: 'some content2', status: 'unstarted', priority: 1, limit_date: Date.new(2021,9,9))
+         user = FactoryBot.create(:user2, name: 'Loren', email: 'odette@gmail.com', password: '123456')
+         FactoryBot.create(:task, name: 'task1', content: 'some content1', status: 'unstarted', priority: 1, limit_date: Date.new(2021,9,9), user_id: user.id)
+         FactoryBot.create(:task, name: 'task2', content: 'some content2', status: 'unstarted', priority: 1, limit_date: Date.new(2021,9,9), user_id: user.id)
 
          visit tasks_path
          tasks= all('.task_row')
@@ -25,7 +27,8 @@ RSpec.describe 'Task management function', type: :system do
   describe 'List display function' do
     context 'When transitioning to the list screen' do
       it 'The created task list is displayed' do
-        task = FactoryBot.create(:task, name: 'task', content: 'some content', status: 'unstarted', priority: 1, limit_date: Date.new(2021,9,9))
+        user = FactoryBot.create(:user2, name: 'Loren', email: 'odette@gmail.com', password: '123456')
+        task = FactoryBot.create(:task, name: 'task', content: 'some content', status: 'unstarted', priority: 1, limit_date: Date.new(2021,9,9), user_id: user.id)
 
         visit tasks_path
         expect(page).to have_content 'task'
@@ -34,8 +37,9 @@ RSpec.describe 'Task management function', type: :system do
 
     context 'When tasks are listed in descending order of creation date and time' do
       it 'displayed a list of created tasks' do
-        FactoryBot.create(:task, name: 'task1', content: 'some content', status: 'unstarted', priority: 1, limit_date: Date.new(2021,9,9))
-        FactoryBot.create(:task, name: 'task2', content: 'some content', status: 'unstarted', priority: 2, limit_date: Date.new(2021,9,9))
+        user = FactoryBot.create(:user2, name: 'Loren', email: 'odette@gmail.com', password: '123456')
+        FactoryBot.create(:task, name: 'task1', content: 'some content', status: 'unstarted', priority: 1, limit_date: Date.new(2021,9,9), user_id: user.id)
+        FactoryBot.create(:task, name: 'task2', content: 'some content', status: 'unstarted', priority: 2, limit_date: Date.new(2021,9,9), user_id: user.id)
         visit tasks_path
         tasks = all('.task_row')
         expect(tasks[0]).to have_content 'task2'
@@ -45,8 +49,9 @@ RSpec.describe 'Task management function', type: :system do
 
     context 'If you click the link to sort by end deadline' do
       it 'display a list of tasks sorted in descending order of end deadlines' do
-        FactoryBot.create(:task, name: 'task', content: 'some content', status: 'unstarted', priority: 1, limit_date: Date.new(2021,9,9))
-        FactoryBot.create(:task, name: 'task1', content: 'some content', status: 'unstarted', priority: 1, limit_date: Date.today)
+        user = FactoryBot.create(:user2, name: 'Loren', email: 'odette@gmail.com', password: '123456')
+        FactoryBot.create(:task, name: 'task', content: 'some content', status: 'unstarted', priority: 1, limit_date: Date.new(2021,9,9), user_id: user.id)
+        FactoryBot.create(:task, name: 'task1', content: 'some content', status: 'unstarted', priority: 1, limit_date: Date.today, user_id: user.id)
 
         visit tasks_path
         click_on 'Deadline'
@@ -62,7 +67,7 @@ RSpec.describe 'Task management function', type: :system do
   describe 'Detailed display function' do
     context 'When transitioned to any task details screen' do
       it 'The content of the relevant task is displayed' do
-        task = FactoryBot.create(:task, name: 'task', content: 'some content', status: 'unstarted', priority: 1, limit_date: Date.new(2021,9,9))
+        task = FactoryBot.create(:task, name: 'task', content: 'some content', status: 'unstarted', priority: 1, limit_date: Date.new(2021,9,9), user_id: user.id)
 
         visit task_path(task.id)
         expect(page).to have_content 'task'
@@ -73,8 +78,8 @@ RSpec.describe 'Task management function', type: :system do
   #nouveau tests
   describe 'Search function' do
     before do
-      task = FactoryBot.create(:task, name: 'task', content: 'some content', status: 'in progress', priority: 1, limit_date: Date.new(2021,9,9))
-      task1 = FactoryBot.create(:task, name: 'task1', content: 'some content', status: 'unstarted', priority: 1, limit_date: Date.new(2021,9,9))
+      task = FactoryBot.create(:task, name: 'task', content: 'some content', status: 'in progress', priority: 1, limit_date: Date.new(2021,9,9), user_id: user.id)
+      task1 = FactoryBot.create(:task, name: 'task1', content: 'some content', status: 'unstarted', priority: 1, limit_date: Date.new(2021,9,9), user_id: user.id)
 
       #FactoryBot.create(:second_task, title: "sample")
     end

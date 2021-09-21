@@ -1,45 +1,53 @@
 require 'rails_helper'
 RSpec.describe Task, type: :model do
+
   it "is valid with name, limit_date, status" do
-    task = Task.new(name: 'Move tables', content: 'some content', limit_date: Date.new(2021,9,30), status: "finished", priority: 1)
+    user =   FactoryBot.create(:user2, name: 'Loren', email: 'damy@gmail.com', password: '123456')
+    task = Task.new(name: 'Move tables', content: 'some content', limit_date: Date.new(2021,9,30), status: "finished", priority: 1, user_id: user.id)
     task.valid?
     expect(task).to be_valid
   end
 
   it "is invalid without a name" do
-    task = Task.new(name: nil, content: 'some content', limit_date: Date.new(2021,9,30), status: "finished", priority: 1)
+    user =   FactoryBot.create(:user2, name: 'Loren', email: 'tago@gmail.com', password: '123456')
+    task = Task.new(name: nil, content: 'some content', limit_date: Date.new(2021,9,30), status: "finished", priority: 1, user_id: user.id)
     task.valid?
     expect(task.errors[:name]).to include("doit être rempli(e)")
 
   end
 
   it "is invalid without a content" do
-    task = Task.new(name: 'Move tables', content: nil, limit_date: Date.new(2021,9,30), status: "finished", priority: 1)
+    user =   FactoryBot.create(:user2, name: 'Loren', email: 'tagolol@gmail.com', password: '123456')
+    task = Task.new(name: 'Move tables', content: nil, limit_date: Date.new(2021,9,30), status: "finished", priority: 1, user_id: user.id)
     task.valid?
     expect(task.errors[:content]).to include("doit être rempli(e)")
 
   end
 
   it "is invalid without a limit_date" do
-    task = Task.new(name: 'Move tables', content: 'some content', limit_date: nil , status: "finished", priority: 1)
+    user =   FactoryBot.create(:user2, name: 'Loren', email: 'taglo@gmail.com', password: '123456')
+    task = Task.new(name: 'Move tables', content: 'some content', limit_date: nil , status: "finished", priority: 1, user_id: user.id)
     task.valid?
     expect(task.errors[:limit_date]).to include("doit être rempli(e)")
   end
   it "is invalid without a status" do
-    task = Task.new(name: 'Move tables', content: 'some content', limit_date: Date.new(2021,9,30), status: nil , priority: 1)
+    user =   FactoryBot.create(:user2, name: 'Loren', email: 'tagmoo@gmail.com', password: '123456')
+    task = Task.new(name: 'Move tables', content: 'some content', limit_date: Date.new(2021,9,30), status: nil , priority: 1, user_id: user.id)
     task.valid?
     expect(task.errors[:status]).to include("doit être rempli(e)")
   end
   it "is invalid without a priority" do
-    task = Task.new(name: 'Move tables', content: 'some content', limit_date: Date.new(2021,9,30), status: "finished", priority: nil )
+    user =   FactoryBot.create(:user2, name: 'Loren', email: 'tagil@gmail.com', password: '123456')
+    task = Task.new(name: 'Move tables', content: 'some content', limit_date: Date.new(2021,9,30), status: "finished", priority: nil , user_id: user.id)
     task.valid?
     expect(task.errors[:priority]).to include("doit être rempli(e)")
   end
-  
+
   describe 'Search function' do
     # 必要に応じて、testデータの内容を変更して構わない
-    let!(:task) { FactoryBot.create(:task, name: 'task', content: 'some content', status: 'in progress', priority: 1, limit_date: Date.new(2021,9,9))}
-    let!(:second_task) { FactoryBot.create(:task, name: 'task1', content: 'some content', status: 'unstarted', priority: 1, limit_date: Date.new(2021,9,9)) }
+      user1 =   FactoryBot.create(:user2, name: 'Loren', email: 'eleonori@gmail.com', password: '123456')
+    let!(:task) { FactoryBot.create(:task, name: 'task', content: 'some content', status: 'in progress', priority: 1, limit_date: Date.new(2021,9,9), user_id: user1.id)}
+    let!(:second_task) { FactoryBot.create(:task, name: 'task1', content: 'some content', status: 'unstarted', priority: 1, limit_date: Date.new(2021,9,9), user_id: user1.id) }
     context 'Title is performed by scope method' do
       it "Tasks containing search keywords are narrowed down" do
         # title_seach is a Title search method presented by scope. The method name can be arbitrary.
