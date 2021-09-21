@@ -9,21 +9,37 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-  	<div class="container">
-		<div class="row ">
-		  <header>
-        <ul class="nav nav-pills" style="background-color: #f4f5f7;">
-  			  <li class="">
-  			    <a class="nav-link" href="#">Task_Management</a>
-  			  </li>
-  			  <li><%= link_to 'task registration', new_task_path, class: 'nav-link' %></li>
-  			  <li><%= link_to 'Task list', tasks_path, class: 'nav-link' %></li>
-  			  <li><%= link_to 'account',tasks_path,class: 'nav-link' %></li>
-  			  <li><%= link_to 'Logout',tasks_path, class: 'nav-link' %></li>
-  			</ul>
-      </header>
-		</div>
 
+    <div class="container">
+      <% if logged_in? %>
+        <div class="row ">
+          <header>
+            <ul class="nav nav-pills" style="background-color: #f4f5f7;">
+              <li class="">
+                <a class="nav-link" href="#">Task_Management</a>
+              </li>
+              <li><%= link_to "Task registration", new_task_path %></li>
+              <li><%= link_to "Task list", tasks_path %></li>
+              <li><%= link_to "account", user_path(@current_user.id) %></li>
+              <li><%= link_to "Logout", session_path(current_user.id), method: :delete %></li>
+               <% if @current_user.admin %> 
+                <li>
+                  <%= link_to "Users management", admin_users_path %>
+                </li>
+               <% end %> 
+            </ul>
+          </header>
+      <% else  %>
+      <%= link_to "Sign up", new_user_path, class: 'btn btn-primary', style: 'color: white' %>
+      <%= link_to "Login", new_session_path, class: 'btn btn-success', style: 'color: white' %>
+      <% end %>
+    </div>
+
+    <div class="flash">
+      <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key}") %>
+      <% end %>
+    </div>
 
     <%= yield %>
 
@@ -33,6 +49,8 @@
         <p class="text-muted copyrigth">© 2021</p>
      </footer>
     </div>
+
+
 
 
   </body>

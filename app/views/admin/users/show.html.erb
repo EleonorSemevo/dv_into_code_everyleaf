@@ -1,0 +1,50 @@
+<h2>My page</h2>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<%= link_to 'Edit', edit_admin_user_path(@user), class: 'btn btn-primary' %> 
+
+
+<h5>Users'Tasks</h5>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th  scope="col">Name</th>
+      <th  scope="col">Content</th>
+      <th  scope="col" class="text-primary">
+        Deadline
+      </th>
+      <th  scope="col">Status</th>
+      <th  scope="col" class="text-primary">
+        Priority
+      </th>
+      <!--<th colspan="3"></th>-->
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.tasks.each do |task| %>
+      <tr>
+        <td class="task_row"><%= task.name %></td>
+        <td><%= task.content %></td>
+        <td><%= task.limit_date %></td>
+        <td class="task_status"><%= task.status %></td>
+        <td><%= task.priority %></td>
+        <td><%= link_to 'Show', task %></td>
+        <td><%= link_to 'Edit', edit_task_path(task) %></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back', admin_users_path, class: 'btn btn-success left-marge', style: "color: white;" %>

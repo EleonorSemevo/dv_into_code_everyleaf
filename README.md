@@ -26,3 +26,8 @@ heroku buildpacks:add --index 1 heroku/nodejs
  git push heroku partie2
 
 Gem version: 3.0.3
+
+#Admin connection identifier 
+email: admin@gmail.com
+password: admin123
+
