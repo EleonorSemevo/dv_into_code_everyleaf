@@ -14,19 +14,27 @@
         <td><%= @task.content %></td>
       </tr>
 
-<tr>
-	<th  scope="col">Deadline</th>
-	<td>  <%= @task.limit_date %></td>
-      </tr>
+    <tr>
+    	<th  scope="col">Deadline</th>
+    	<td>  <%= @task.limit_date %></td>
+    </tr>
 
-<tr>
+      <tr>
         <th  scope="col">Status</th>
         <td>  <%= @task.status %></td>
       </tr>
 
-<tr>
+      <tr>
         <th  scope="col">Priority</th>
         <td><%= @task.priority %></td>
+      </tr>
+      <tr>
+          <th  scope="col">Labels</th>
+          <td>
+            <% @task.tasks_tags.each do |tag| %>
+              <%= tag.name %>,
+            <% end %>
+          </td>
       </tr>
 
 

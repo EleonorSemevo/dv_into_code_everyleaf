@@ -22,6 +22,11 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
         session[:user_id] = @user.id
+        Tag.create(user_id: @user.id, name: 'Label1')
+        Tag.create(user_id: @user.id, name: 'Label2')
+        Tag.create(user_id: @user.id, name: 'Label3')
+        Tag.create(user_id: @user.id, name: 'Label4')
+        Tag.create(user_id: @user.id, name: 'Label5')
         redirect_to user_path(@user), notice: "User was successfully created."
     else
       render :new, status: :unprocessable_entity

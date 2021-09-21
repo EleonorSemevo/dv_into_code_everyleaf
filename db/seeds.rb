@@ -7,17 +7,24 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-Task.create(name: 'task5', content: 'Something', status: "in progress", priority: 2, limit_date: Date.today)
+User.create(name: "eleonor", email: 'eleonor@gmail.com', password: 'hello1234', password_confirmation: 'hello1234')
+User.create(name: "admin", email: 'admin@gmail.com', password: 'admin123', password_confirmation: 'admin123', admin: true)
+
+Task.create(name: 'task5', content: 'Something', status: "in progress", priority: 2, limit_date: Date.today,user_id: 1)
 
 500.times do
-  Task.create(name: 'task1', content: 'Something', status: "in progress", priority: 2, limit_date: Date.today)
+  Task.create(name: 'task1', content: 'Something', status: "in progress", priority: 2, limit_date: Date.today, user_id: 2)
 end
 
 50.times do
   Task.create(name: 'Task2', content: 'Great things',
-     status: "unstarted", priority: 2, limit_date: Date.today)
+     status: "unstarted", priority: 2, limit_date: Date.today, user_id: 1)
 end
 
 
-User.create(name: "eleonor", email: 'eleonor@gmail.com', password: 'hello1234', password_confirmation: 'hello1234')
-User.create(name: "admin", email: 'admin@gmail.com', password: 'admin123', password_confirmation: 'admin123', admin: true)
+  Tag.create(user_id: 1, name: 'article1')
+  Tag.create(user_id: 1, name: 'article2')
+  Tag.create(user_id: 1, name: 'article3')
+  Tag.create(user_id: 2, name: 'article1')
+  Tag.create(user_id: 2, name: 'article2')
+  Tag.create(user_id: 2, name: 'article3')

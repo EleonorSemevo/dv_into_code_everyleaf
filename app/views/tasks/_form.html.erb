@@ -36,8 +36,24 @@
     <%= form.select(:priority, Task.priorities,{}, class: 'select-form') %>
   </div>
 
+  <br>
+  <% @tags.each do |tag| %>
+  <%= form.check_box :tag_ids, {multiple: true, checked: tag[:checked], disabled: tag[:disabled], include_hidden: false}, tag[:id] %>
+  <label style="background-color: aquamarine " for="task_tag_ids_<%= tag.id  %> "> <%= tag.name  %></label>
+  <% end %>
+
+  <% if @clicked_tags != nil%>
+  <% @clicked_tags.each do |tag| %>
+  <%= form.check_box :tag_ids, {multiple: true, checked: true}, tag[:id] %>
+  <label style="background-color: aquamarine " for="task_tag_ids_<%= tag.id  %> "> <%= tag.name  %></label>
+  <% end %>
+  <% end %>
+
   <div class="actions">
-    <%= form.submit class: 'btn btn-primary left-marge' %>
+    <%= form.submit 'Enregistrer', class: 'btn btn-primary left-marge' %>
   </div>
 <% end %>
+
+
+
 <div>

@@ -1,0 +1,26 @@
+<h1>General Label list</h1>
+
+<div class="row">
+	<%= link_to 'New Tag', new_tag_path, class: 'btn btn-primary left-marge', style: "color: white;" %>
+
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th  scope="col">Name</th>
+  </thead>
+
+  <tbody>
+    <% @tags.each do |tag| %>
+      <tr>
+        <td class="task_row"><%= tag.name %></td>
+        <td><%= link_to 'Show', tag, class: 'show_link clear_link' %></td>
+        <td><%= link_to 'Edit', edit_tag_path(tag), class: 'edit_link clear_link' %></td>
+        <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } , class: 'destroy_method clear_link'%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
